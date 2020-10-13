@@ -61,7 +61,8 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+        "proxyConfig": "./proxy.config.js",
+        "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "comercial-front:build"
           },
@@ -123,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "comercial-front"
+  "defaultProject": "comercial-front",
+  "cli": {
+    "analytics": false
+  }
 }
