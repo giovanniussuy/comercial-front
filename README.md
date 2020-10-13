@@ -1,3 +1,7 @@
+# Primeira execução
+
+Abrir o terminal na pasta do projeto, e executar o comando npm install, ao terminar executar o comando: ng serve.
+
 # ComercialFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.5.
