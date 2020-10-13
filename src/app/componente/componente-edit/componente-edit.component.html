@@ -1,0 +1,6 @@
+<po-page-edit p-title="Portinari Page Edit" [p-disable-submit]="formEditUser.invalid">
+    <form #formEditUser="ngForm">
+        <po-datepicker name="codigo" p-label="Código do Componente" [(ngModel)]="componente.data">
+        </po-datepicker>
+    </form>
+</po-page-edit>
