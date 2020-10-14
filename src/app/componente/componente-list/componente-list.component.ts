@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import { PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { ComponenteService } from '../componente.service';
 
 @Component({
@@ -20,14 +20,27 @@ export class ComponenteListComponent {
         { label: 'Novo', action: item => this.router.navigateByUrl(`componente/new`) }
     ];
 
+    // tableColumn: Array<PoTableColumn> = [{label:'Codigo'}];
+    public tableColumn: Array<PoTableColumn> = [{
+        property: 'codigo',
+        width: '40%',
+        label: 'Código',
+        format: ''
+      }, {
+        property: 'descricao',
+        width: '40%',
+        label: 'Descrição',
+        format: ''
+      }];
+
     tableActions: PoTableAction[] = [
         {
-            label: '', icon: "po-icon po-icon-edit",
+            label: 'Editar', icon: "po-icon po-icon-edit",
             action: item => this.router.navigateByUrl(`componente/edit/${item.id}`)
         },
-        
+
         {
-            label: '', icon: "po-icon po-icon-delete",
+            label: 'Deletar', icon: "po-icon po-icon-delete",
             action: item => this.delete.bind(item)
         }
     ];
@@ -35,10 +48,9 @@ export class ComponenteListComponent {
     load() {
         this.service.get().subscribe((response) => { this.items = response.items; console.log(this.items) });
     }
-    
-  delete(item: any) {
-    this.service.delete(item.id).subscribe(() => this.load())
-  }
 
+    delete(item: any) {
+        this.service.delete(item.id).subscribe(() => this.load())
+    }
 
 }

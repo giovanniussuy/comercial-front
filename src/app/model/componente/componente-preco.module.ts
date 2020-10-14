@@ -2,7 +2,7 @@ import { Item } from '../item/item.module';
 import { Model } from "../Model";
 
 export interface ComponentePreco extends Model {
-    codigo: number;
+    codigo: string;
     descricao: string;
     unidadeMedida: string;
     moeda: string;
