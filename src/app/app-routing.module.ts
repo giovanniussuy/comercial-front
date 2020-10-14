@@ -4,7 +4,7 @@ import { ComponenteListComponent } from './componente/componente-list/componente
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'list',
     component: ComponenteListComponent
   },
   {
