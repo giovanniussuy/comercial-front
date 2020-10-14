@@ -6,7 +6,7 @@ import { ComponenteEditComponent } from './componente-edit/componente-edit.compo
 
 const routes: Routes = [{
   path: '', 
-  component: ComponenteEditComponent
+  component: ComponenteListComponent
 },
 {
   path: 'new', 

@@ -1,1 +1,6 @@
-<po-table [p-items]="[{ table: 'PO Table' }]"> </po-table>
+<po-page-list p-title="Componentes de preço" [p-actions]="pageActions">
+
+    <po-table [p-items]="items" [p-actions]="tableActions">
+    </po-table>
+
+</po-page-list>
