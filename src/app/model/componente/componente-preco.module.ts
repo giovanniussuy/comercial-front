@@ -8,9 +8,12 @@ export interface ComponentePreco extends Model {
     moeda: string;
     codigoExterno: string;
     tipo: string;
-    tabela: string;
+    tabelaPreco: string;
     aplicacao: string;
     ativo: boolean;
     hedge: boolean;
-    item: Array<Item>;
+    item: Array<any>;
+    componente: Array<any>;
+    tipoFrete: Array<any>;
+    finalidade: Array<any>;
 }

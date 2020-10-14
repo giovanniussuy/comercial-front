@@ -1,6 +1,6 @@
 import { Model } from "../Model";
 
 export interface Item extends Model {
-    codigo: number;
+    codigo: string;
     descricao: string;
 }

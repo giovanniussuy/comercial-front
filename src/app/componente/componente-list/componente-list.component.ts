@@ -41,7 +41,7 @@ export class ComponenteListComponent {
 
         {
             label: 'Deletar', icon: "po-icon po-icon-delete",
-            action: item => this.delete.bind(item)
+            action: item => this.delete(item)
         }
     ];
 

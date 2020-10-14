@@ -10,7 +10,6 @@ export class AppComponent {
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Principal', link: '/', icon: 'po-icon-home', shortLabel: 'Principal' },
-    { label: 'Listar', link: '/list', icon: 'po-icon-plus-circle', shortLabel: 'Componente' },
     { label: 'Componente de Preços', link: '/componente', icon: 'po-icon-plus-circle', shortLabel: 'Componente' },
   ];
 

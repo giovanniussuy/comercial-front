@@ -1,49 +1,50 @@
-<po-page-edit p-title="Editar ou Incluir componente" [p-disable-submit]="formEditUser.invalid">
+<po-page-edit [p-title]="pTitle" [p-disable-submit]="formEditUser.invalid" (p-cancel)="cancel()" (p-save)="save()">
     <form #formEditUser="ngForm">
-        
+
         <po-container *ngIf="componente" p-height="" p-no-border="false" p-no-padding="false" p-no-shadow="false">
 
             <po-input class="po-md-3" name="codigo" [(ngModel)]="componente.codigo" p-label="Código" p-clean="true"
                 p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false" p-required="false">
             </po-input>
 
-            <po-input class="po-md-3" name="descricao" [(ngModel)]="componente.descricao" p-label="Descrição" p-clean="true"
-                p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false" p-required="false">
-            </po-input>
-
-            <po-input class="po-md-2" name="unidadeMedida" [(ngModel)]="componente.unidadeMedida" p-label="Unidade de Medida"
+            <po-input class="po-md-3" name="descricao" [(ngModel)]="componente.descricao" p-label="Descrição"
                 p-clean="true" p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false"
                 p-required="false">
+            </po-input>
+
+            <po-input class="po-md-2" name="unidadeMedida" [(ngModel)]="componente.unidadeMedida"
+                p-label="Unidade de Medida" p-clean="true" p-mask-format-model="false" p-disabled="false"
+                p-focus="false" p-readonly="false" p-required="false">
             </po-input>
 
             <po-select class="po-md-2" name="selectMoeda" p-label="Moeda" [(ngModel)]="componente.moeda" [p-options]="[
-            { label: 'Real - BRL', value: '1' },
-            { label: 'Dolar EUA - USD', value: '2' },
-            { label: 'Euro - EUR', value: '3' } ]">
+            { label: 'Real - BRL', value: 'REAL' },
+            { label: 'Dolar EUA - USD', value: 'DOLAR' },
+            { label: 'Euro - EUR', value: 'EURO' } ]">
             </po-select>
 
-            <po-input class="po-md-2" name="codigoExterno" [(ngModel)]="componente.codigoExterno" p-label="Código Externo"
-                p-clean="true" p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false"
-                p-required="false">
+            <po-input class="po-md-2" name="codigoExterno" [(ngModel)]="componente.codigoExterno"
+                p-label="Código Externo" p-clean="true" p-mask-format-model="false" p-disabled="false" p-focus="false"
+                p-readonly="false" p-required="false">
             </po-input>
 
             <po-select class="po-md-3" name="selectTipo" p-label="Tipo" [(ngModel)]="componente.tipo" [p-options]="[
-            { label: 'Preço calculado', value: '1' },
-            { label: 'Preço proposto', value: '2' },
-            { label: 'Preço sazionais', value: '3' } ]">
+            { label: 'Preço negociado', value: 'PRECO_NEGOCIADO' },
+            { label: 'Preço proposto', value: 'PRECO_PROPOSTO' } ]">
             </po-select>
 
-            <po-input class="po-md-2" name="tabela" [(ngModel)]="componente.tabela" p-label="Tabela" p-clean="true"
-                p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false" p-required="false">
-            </po-input>
-
-            <po-select class="po-md-3" name="selectAplicacao" p-label="Aplicação" [(ngModel)]="componente.aplicacao"
+            <po-select class="po-md-2" name="tabelaPreco" p-label="Tabela de preço" [(ngModel)]="componente.tabelaPreco"
                 [p-options]="[
-            { label: 'Compra', value: '1' },
-            { label: 'Venda', value: '2' },
-            { label: 'Ambos', value: '3' } ]">
+            { label: 'FRETE', value: 'FRETE' },
+            { label: 'CBOT', value: 'CBOT' }]">
             </po-select>
 
+            <po-select class="po-md-2" name="selectAplicacao" p-label="Aplicação" [(ngModel)]="componente.aplicacao"
+                [p-options]="[
+            { label: 'VENDA', value: 'VENDA' },
+            { label: 'COMPRA', value: 'COMPRA' },
+            { label: 'AMBOS', value: 'AMBOS' } ]">
+            </po-select>
 
             <po-switch class="po-md-2" name="ativo" [(ngModel)]="componente.ativo" p-label="Ativo" p-label-on="Ativo-On"
                 p-label-off="Ativo-Off" p-label-position="right" p-help="" p-disabled="false" p-auto-focus="false">
@@ -57,21 +58,83 @@
         <po-container p-height="" p-no-border="false" p-no-padding="false" p-no-shadow="false">
             <po-tabs>
                 <po-tab p-label="Itens" p-active="true">
-                    <po-table [p-items]="[
-                    { item: 'Milho', descricao: 'Milho comprado'}, 
-                    { item: 'Soja', descricao: 'Soja comprado'}, 
-                    { item: 'Trigo', descricao: 'Trigo comprado'} ]">
+                    <po-table [(p-items)]="componente.item" [p-actions]="tableActions">
                     </po-table>
+
+                    <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
+                        (p-click)="modalItem.open()">
+                    </po-button>
+
+                    <po-modal #modalItem p-title="Incluir Item" [p-primary-action]="pModalItemAction"
+                        [p-secondary-action]="sModalItemAction ? sModalItemAction : null" p-click-out="true">
+                        <po-select class="po-md-6" name="selectItens" p-label="Itens" [(ngModel)]="itemSelect"
+                            [p-options]="[
+                            { label: 'Milho comprado', value: 'Milho' },
+                            { label: 'Soja comprado', value: 'Soja' },
+                            { label: 'Trigo comprado', value: 'Trigo' }  ]">
+                        </po-select>
+                    </po-modal>
                 </po-tab>
+
                 <po-tab p-label="Componentes">
+                    <po-table [(p-items)]="componente.componente">
+                    </po-table>
 
+                    <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
+                        (p-click)="modalComponente.open()">
+                    </po-button>
+
+                    <po-modal #modalComponente p-title="Incluir Componente" [p-primary-action]="pModalComponenteAction"
+                        [p-secondary-action]="sModalComponenteAction ? sModalComponenteAction : null"
+                        p-click-out="true">
+                        <po-select class="po-md-6" name="selectComponente" p-label="Componentes"
+                            [(ngModel)]="componenteSelect" [p-options]="[
+                            { label: 'Balança', value: 'BALANCA' },
+                            { label: 'Frete', value: 'FRETE' },
+                            { label: 'Cambio', value: 'CAMBIO' }  ]">
+                        </po-select>
+                    </po-modal>
                 </po-tab>
+
                 <po-tab p-label="Tipos de frete">
+                    <po-table [(p-items)]="componente.tipoFrete">
+                    </po-table>
 
+                    <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
+                        (p-click)="modalTipoFrete.open()">
+                    </po-button>
+
+                    <po-modal #modalTipoFrete p-title="Incluir tipo de frete" [p-primary-action]="pModalTipoFreteAction"
+                        [p-secondary-action]="sModalTipoFreteAction ? sModalTipoFreteAction : null" p-click-out="true">
+                        <po-select class="po-md-6" name="selectTipoFrete" p-label="Componentes"
+                            [(ngModel)]="tipoFreteSelect" [p-options]="[
+                            { label: 'Frete turistico', value: 'Frete turistico' },
+                            { label: 'Frete pesado', value: 'Frete pesado' },
+                            { label: 'Frete internacional', value: 'Frete internacional' }  ]">
+                        </po-select>
+                    </po-modal>
                 </po-tab>
+
                 <po-tab p-label="Finalidades">
+                    <po-table [(p-items)]="componente.finalidade">
+                    </po-table>
 
+                    <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
+                        (p-click)="modalFinalidade.open()">
+                    </po-button>
+
+                    <po-modal #modalFinalidade p-title="Incluir finalidade" [p-primary-action]="pModalFinalidadeAction"
+                        [p-secondary-action]="sModalFinalidadeAction ? sModalFinalidadeAction : null"
+                        p-click-out="true">
+                        <po-select class="po-md-6" name="selectFinalidade" p-label="Componentes"
+                            [(ngModel)]="finalidadeSelect" [p-options]="[
+                            { label: 'Compra', value: 'Compra' },
+                            { label: 'Venda', value: 'Venda' },
+                            { label: 'Presente', value: 'Presente' }  ]">
+                        </po-select>
+                    </po-modal>
                 </po-tab>
+
             </po-tabs>
         </po-container>
 
