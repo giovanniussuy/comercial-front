@@ -1,10 +1,14 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild,TemplateRef } from '@angular/core';
+import { ComponenteService } from '../componente.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
+
 import { PoComboOptionTemplateDirective, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { ComponentePreco } from 'src/app/model/componente/componente-preco.module';
 import { Tipos } from 'src/app/model/componente/tipos.module';
 import { Item } from 'src/app/model/item/item.module';
-import { ComponenteService } from '../componente.service';
+
 
 @Component({
   selector: 'app-componente-edit',
@@ -12,6 +16,61 @@ import { ComponenteService } from '../componente.service';
   styleUrls: ['./componente-edit.component.css']
 })
 export class ComponenteEditComponent implements OnInit {
+/*
+  componente: any = {};
+
+  id: string;
+
+  @ViewChild('formEditUser', { static: true }) 
+  formEditUser: NgForm;
+
+  constructor(private service: ComponenteService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.id = this.activatedRoute.snapshot.params.id;
+    if(this.id){
+      this.service.getById(this.id).subscribe(componente => this.componente = componente);
+    }
+  }
+
+
+
+  cancel() {
+    this.back()
+  }
+
+  save() {
+
+
+    if(this.id){
+      this.service.update(this.componente, this.id).subscribe(()=> this.back());
+    } else {
+      this.criarComponente();
+      this.service.create(this.componente).subscribe(() => this.back());
+    }
+  }
+
+  criarComponente(){
+    this.componente = {
+      data: this.componente.data,
+      nutrientes: [{
+        tipo: "NITROGENIO",
+        valor: 0,
+        valorIdeal: 0
+      }]
+  }
+  }
+  saveNew(){
+    this.criarComponente();
+    this.service.create(this.componente).subscribe(() => this.initialize());
+
+  }
+
+  back(){
+    this.router.navigateByUrl(`componente`);
+  }
+
+  initialize(){
+    this.componente = {};
+  }*/
 
   componente: ComponentePreco;
   aplicacaoOpcoes: [];
@@ -51,6 +110,8 @@ export class ComponenteEditComponent implements OnInit {
     }, {_id: '3', codigo: 3, descricao: 'item 3'
   }]
     this.componente = {_id: '1', codigo: 1, descricao: 'Frete', unidadeMedida: 'km', moeda: 'R$', codigoExterno: '1', tipo: '1', tabela: 'Fretes', aplicacao: 'Frete', ativo: false, hedge: false, item: this.items}
+
+    console.log('teste')
   }
 
   delete(item: any) {
@@ -60,4 +121,5 @@ export class ComponenteEditComponent implements OnInit {
   load() {
     // this.service.get().subscribe((response) => { this.items = response.items });s
   }
+
 }

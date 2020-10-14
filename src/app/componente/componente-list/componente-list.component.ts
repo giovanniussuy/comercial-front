@@ -4,9 +4,9 @@ import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
 import { ComponenteService } from '../componente.service';
 
 @Component({
-    selector: 'app-componente-list',
-    templateUrl: './componente-list.component.html',
-    styleUrls: ['./componente-list.component.css']
+  selector: 'app-componente-list',
+  templateUrl: './componente-list.component.html',
+  styleUrls: ['./componente-list.component.css']
 })
 export class ComponenteListComponent {
 
