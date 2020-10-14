@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoTableColumn } from '@po-ui/ng-components';
 import { ComponentePreco } from 'src/app/model/componente/componente-preco.module';
-import { Tipos } from 'src/app/model/componente/tipos.module';
 import { ComponenteService } from '../componente.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { ComponenteService } from '../componente.service';
   styleUrls: ['./componente-edit.component.css']
 })
 export class ComponenteEditComponent implements OnInit {
-  componente: ComponentePreco;
+  componente: ComponentePreco = { codigo: '', descricao: '', aplicacao: '', unidadeMedida: '', moeda: '', item: [], tabela: '', codigoExterno: '', ativo: true, hedge: true, tipo: '', _id: '' };
   aplicacaoOpcoes: [];
   id: string;
 
@@ -32,24 +31,20 @@ export class ComponenteEditComponent implements OnInit {
   }];
 
   constructor(private service: ComponenteService, private activatedRoute: ActivatedRoute, private router: Router) {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.id = this.activatedRoute.snapshot.params.id;
 
     if (this.id) {
-      this.load(this.id)
+      this.load()
     }
   }
 
   ngOnInit() {
   }
 
-  load(id: string) {
-    // if (this.id != null) {
-    this.service.getById(id).subscribe((response) => {
-      console.log(response.codigo)
-      this.componente.codigo = response.codigo, this.componente.descricao = response.descricao,
-        console.log(this.componente.codigo)
+  load() {
+    this.service.getById(this.id).subscribe((response) => {
+      this.componente = response
     });
-    // }
   }
 
 }

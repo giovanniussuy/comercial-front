@@ -3,15 +3,15 @@
         
         <po-container *ngIf="componente" p-height="" p-no-border="false" p-no-padding="false" p-no-shadow="false">
 
-            <po-input class="po-md-3" name="" [(ngModel)]="componente.codigo" p-label="Código" p-clean="true"
+            <po-input class="po-md-3" name="codigo" [(ngModel)]="componente.codigo" p-label="Código" p-clean="true"
                 p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false" p-required="false">
             </po-input>
 
-            <po-input class="po-md-3" name="" [(ngModel)]="componente.descricao" p-label="Descrição" p-clean="true"
+            <po-input class="po-md-3" name="descricao" [(ngModel)]="componente.descricao" p-label="Descrição" p-clean="true"
                 p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false" p-required="false">
             </po-input>
 
-            <po-input class="po-md-2" name="" [(ngModel)]="componente.unidadeMedida" p-label="Unidade de Medida"
+            <po-input class="po-md-2" name="unidadeMedida" [(ngModel)]="componente.unidadeMedida" p-label="Unidade de Medida"
                 p-clean="true" p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false"
                 p-required="false">
             </po-input>
@@ -22,7 +22,7 @@
             { label: 'Euro - EUR', value: '3' } ]">
             </po-select>
 
-            <po-input class="po-md-2" name="" [(ngModel)]="componente.codigoExterno" p-label="Código Externo"
+            <po-input class="po-md-2" name="codigoExterno" [(ngModel)]="componente.codigoExterno" p-label="Código Externo"
                 p-clean="true" p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false"
                 p-required="false">
             </po-input>
@@ -33,7 +33,7 @@
             { label: 'Preço sazionais', value: '3' } ]">
             </po-select>
 
-            <po-input class="po-md-2" name="" [(ngModel)]="componente.tabela" p-label="Tabela" p-clean="true"
+            <po-input class="po-md-2" name="tabela" [(ngModel)]="componente.tabela" p-label="Tabela" p-clean="true"
                 p-mask-format-model="false" p-disabled="false" p-focus="false" p-readonly="false" p-required="false">
             </po-input>
 
@@ -45,11 +45,11 @@
             </po-select>
 
 
-            <po-switch class="po-md-2" name="" [(ngModel)]="componente.ativo" p-label="Ativo" p-label-on="Ativo-On"
+            <po-switch class="po-md-2" name="ativo" [(ngModel)]="componente.ativo" p-label="Ativo" p-label-on="Ativo-On"
                 p-label-off="Ativo-Off" p-label-position="right" p-help="" p-disabled="false" p-auto-focus="false">
             </po-switch>
 
-            <po-switch class="po-md-2" name="" [(ngModel)]="componente.hedge" p-label="Hedge" p-label-on="Hedge-On"
+            <po-switch class="po-md-2" name="hedge" [(ngModel)]="componente.hedge" p-label="Hedge" p-label-on="Hedge-On"
                 p-label-off="Hedge-Off" p-label-position="right" p-help="" p-disabled="false" p-auto-focus="false">
             </po-switch>
         </po-container>
