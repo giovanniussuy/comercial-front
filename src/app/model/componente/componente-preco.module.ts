@@ -12,8 +12,8 @@ export interface ComponentePreco extends Model {
     aplicacao: string;
     ativo: boolean;
     hedge: boolean;
-    item: Array<any>;
-    componente: Array<any>;
-    tipoFrete: Array<any>;
-    finalidade: Array<any>;
+    itens: Array<any>;
+    componentes: Array<any>;
+    tiposFrete: Array<any>;
+    finalidades: Array<any>;
 }

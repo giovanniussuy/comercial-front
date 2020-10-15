@@ -23,15 +23,49 @@ export class ComponenteListComponent {
     // tableColumn: Array<PoTableColumn> = [{label:'Codigo'}];
     public tableColumn: Array<PoTableColumn> = [{
         property: 'codigo',
-        width: '40%',
+        width: '20%',
         label: 'Código',
         format: ''
       }, {
         property: 'descricao',
-        width: '40%',
+        width: '30%',
         label: 'Descrição',
         format: ''
-      }];
+      },
+      {
+        property: 'moeda',
+        width: '10%',
+        label: 'Moeda',
+        format: ''
+      },      
+      {
+        property: 'unidadeMedida',
+        width: '10%',
+        label: 'UM',
+        format: ''
+      },
+      {
+        property: 'tipo',
+        width: '10%',
+        label: 'Tipo',
+        format: ''
+      },
+      {
+        property: 'Hedge',
+        width: '10%',
+        label: 'hedge',
+        format: '',
+        type: 'boolean'
+      },
+      ,
+      {
+        property: 'ativo',
+        width: '10%',
+        label: 'Ativo',
+        format: '',
+        type: 'boolean'
+      }
+    ];
 
     tableActions: PoTableAction[] = [
         {

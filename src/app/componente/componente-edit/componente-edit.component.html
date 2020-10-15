@@ -58,7 +58,7 @@
         <po-container p-height="" p-no-border="false" p-no-padding="false" p-no-shadow="false">
             <po-tabs>
                 <po-tab p-label="Itens" p-active="true">
-                    <po-table [(p-items)]="componente.item" [p-actions]="tableActions">
+                    <po-table [(p-items)]="componente.itens" [p-actions]="tableActions" [p-columns]="tableColumn">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -77,7 +77,7 @@
                 </po-tab>
 
                 <po-tab p-label="Componentes">
-                    <po-table [(p-items)]="componente.componente" [p-actions]="tableActions">
+                    <po-table [(p-items)]="componente.componentes" [p-actions]="tableActions">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -97,7 +97,7 @@
                 </po-tab>
 
                 <po-tab p-label="Tipos de frete">
-                    <po-table [(p-items)]="componente.tipoFrete" [p-actions]="tableActions">
+                    <po-table [(p-items)]="componente.tiposFrete" [p-actions]="tableActions">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -116,7 +116,7 @@
                 </po-tab>
 
                 <po-tab p-label="Finalidades">
-                    <po-table [(p-items)]="componente.finalidade" [p-actions]="tableActions">
+                    <po-table [(p-items)]="componente.finalidades" [p-actions]="tableActions">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"

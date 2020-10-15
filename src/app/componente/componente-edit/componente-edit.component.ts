@@ -11,7 +11,7 @@ import { ComponenteService } from '../componente.service';
   styleUrls: ['./componente-edit.component.css']
 })
 export class ComponenteEditComponent implements OnInit {
-  componente: ComponentePreco = { codigo: '', descricao: '', item: [], componente: [], tipoFrete: [], finalidade: [], aplicacao: '', unidadeMedida: '', moeda: '', tabelaPreco: '', codigoExterno: '', ativo: false, hedge: false, tipo: '', _id: '' };
+  componente: ComponentePreco = { codigo: '', descricao: '', itens: [], componentes: [], tiposFrete: [], finalidades: [], aplicacao: '', unidadeMedida: '', moeda: '', tabelaPreco: '', codigoExterno: '', ativo: false, hedge: false, tipo: '', _id: '' };
   aplicacaoOpcoes: [];
   id: string;
   itemSelect: any;
@@ -54,6 +54,13 @@ export class ComponenteEditComponent implements OnInit {
   sModalFinalidadeAction: PoModalAction = { label: 'Cancel', action: () => { this.poModalFinalidade.close(); } };
   pTitle: string;
 
+  public tableColumn: Array<PoTableColumn> = [{
+    property: 'codigo',
+    width: '20%',
+    label: 'Código',
+    format: ''
+}]
+
   constructor(private service: ComponenteService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.id = this.activatedRoute.snapshot.params.id;
     this.pTitle = 'Incluir componente de preço';
@@ -68,11 +75,14 @@ export class ComponenteEditComponent implements OnInit {
 
   load() {
     this.service.getById(this.id).subscribe((response) => {
-      this.componente = response
-      this.componente.item = []
-      this.componente.componente = []
-      this.componente.tipoFrete = []
-      this.componente.finalidade = [];
+      this.componente = response      
+      
+      let qtdItens = this.componente.itens.length;
+      for (let count = 0; count < qtdItens; count++){
+        
+        this.componente.itens[count] = "codigo:" + response.itens.valueOf(count)
+      }
+      
     });
   }
 
@@ -92,20 +102,20 @@ export class ComponenteEditComponent implements OnInit {
 
   delete(obj: any) {
     if (obj.item) {
-      let index = this.componente.item.indexOf(obj)
-      this.componente.item.splice(index, 1)
+      let index = this.componente.itens.indexOf(obj)
+      this.componente.itens.splice(index, 1)
     }
     else if (obj.componente) {
-      let index = this.componente.componente.indexOf(obj)
-      this.componente.componente.splice(index, 1)
+      let index = this.componente.componentes.indexOf(obj)
+      this.componente.componentes.splice(index, 1)
     }
     else if (obj.tipoFrete) {
-      let index = this.componente.tipoFrete.indexOf(obj)
-      this.componente.tipoFrete.splice(index, 1)
+      let index = this.componente.tiposFrete.indexOf(obj)
+      this.componente.tiposFrete.splice(index, 1)
     }
     else if (obj.finalidade) {
-      let index = this.componente.finalidade.indexOf(obj)
-      this.componente.finalidade.splice(index, 1)
+      let index = this.componente.finalidades.indexOf(obj)
+      this.componente.finalidades.splice(index, 1)
     }
   }
 
@@ -113,30 +123,31 @@ export class ComponenteEditComponent implements OnInit {
     this.router.navigateByUrl(`componente`);
   }
 
+  
   incluirItem() {
     let incluirItem = { item: this.itemSelect, descricao: 'vendido' };
-    this.componente.item.push(incluirItem);
+    //this.componente.itens.push(incluirItem);
     this.itemSelect = null;
     this.poModalItem.close();
   }
 
   incluirComponente() {
     let componenteSelect = { componente: this.componenteSelect, descricao: 'oficial' };
-    this.componente.componente.push(componenteSelect);
+    //this.componente.componentes.push(componenteSelect);
     this.componenteSelect = null;
     this.poModalComponente.close();
   }
 
   incluirTipoFrete() {
     let tipoFreteSelect = { tipoFrete: this.tipoFreteSelect, descricao: 'registrado' };
-    this.componente.tipoFrete.push(tipoFreteSelect);
+    //this.componente.tiposFrete.push(tipoFreteSelect);
     this.tipoFreteSelect = null;
     this.poModalTipoFrete.close();
   }
 
   incluirFinalidade() {
     let finalidadeSelect = { finalidade: this.finalidadeSelect, descricao: 'a definir' };
-    this.componente.finalidade.push(finalidadeSelect);
+    //this.componente.finalidades.push(finalidadeSelect);
     this.finalidadeSelect = null;
     this.poModalFinalidade.close();
   }
