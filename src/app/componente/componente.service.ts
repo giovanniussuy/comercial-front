@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PoTableColumnSort, PoTableColumnSortType } from '@po-ui/ng-components';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -21,10 +20,12 @@ export class ComponenteService {
   }
 
   public create(componente: any): Observable<any> {
+    console.log(componente)
     return this.http.post<any>(`${environment.apiBaseUrl}/componente`, componente);
   }
 
   public update(componente: any, id: string): Observable<any> {
+    console.log(componente)
     return this.http.put<any>(`${environment.apiBaseUrl}/componente/${id}`, componente);
   }
 

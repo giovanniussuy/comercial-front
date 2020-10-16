@@ -143,6 +143,7 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
 
   
   incluirItem() {
+    console.log(this.itemSelect)
     let incluirItem = { descricao: this.itemSelect };
     this.componente.itens.push(incluirItem);
     this.itemSelect = null;

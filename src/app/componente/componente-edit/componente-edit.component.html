@@ -12,15 +12,17 @@
                 p-required="false">
             </po-input>
 
-            <po-input class="po-md-2" name="unidadeMedida" [(ngModel)]="componente.unidadeMedida"
-                p-label="Unidade de Medida" p-clean="true" p-mask-format-model="false" p-disabled="false"
-                p-focus="false" p-readonly="false" p-required="false">
-            </po-input>
+            <po-select class="po-md-2" name="unidadeMedida" p-label="Unidade de Medida" [(ngModel)]="componente.unidadeMedida" [p-options]="[
+                { label: 'Kilo', value: 'KG' },
+                { label: 'Saca', value: 'SC' },
+                { label: 'BU', value: 'BU' },
+                { label: 'Tonelada', value: 'TN' } ]">
+            </po-select>
 
             <po-select class="po-md-2" name="selectMoeda" p-label="Moeda" [(ngModel)]="componente.moeda" [p-options]="[
-            { label: 'Real - BRL', value: 'REAL' },
-            { label: 'Dolar EUA - USD', value: 'DOLAR' },
-            { label: 'Euro - EUR', value: 'EURO' } ]">
+                { label: 'Real - BRL', value: 'REAL' },
+                { label: 'Dolar EUA - USD', value: 'DOLAR' },
+                { label: 'Euro - EUR', value: 'EURO' } ]">
             </po-select>
 
             <po-input class="po-md-2" name="codigoExterno" [(ngModel)]="componente.codigoExterno"
