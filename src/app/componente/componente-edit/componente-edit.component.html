@@ -60,7 +60,7 @@
         <po-container p-height="" p-no-border="false" p-no-padding="false" p-no-shadow="false">
             <po-tabs>
                 <po-tab p-label="Itens" p-active="true">
-                    <po-table [(p-items)]="componente.itens" [p-actions]="tableActions" [p-columns]="tableColumn">
+                    <po-table [(p-items)]="componente.itens" [p-actions]="tableActionsItem" [p-columns]="tableColumn">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -76,7 +76,7 @@
                 </po-tab>
 
                 <po-tab p-label="Componentes">
-                    <po-table [(p-items)]="componente.idsComponentes" [p-actions]="tableActions" [p-columns]="tableColumnComponentes"> 
+                    <po-table [(p-items)]="componente.idsComponentes" [p-actions]="tableActionsComponente" [p-columns]="tableColumnComponentes"> 
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -93,7 +93,7 @@
                 </po-tab>
 
                 <po-tab p-label="Tipos de frete">
-                    <po-table [(p-items)]="componente.tiposFrete" [p-actions]="tableActions" [p-columns]= "tableColumnFrete">
+                    <po-table [(p-items)]="componente.tiposFrete" [p-actions]="tableActionsFrete" [p-columns]= "tableColumnFrete">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -109,7 +109,7 @@
                 </po-tab>
 
                 <po-tab p-label="Finalidades">
-                    <po-table [(p-items)]="componente.finalidades" [p-actions]="tableActions" [p-columns]="tableColumnFin">
+                    <po-table [(p-items)]="componente.finalidades" [p-actions]="tableActionsFinalidade" [p-columns]="tableColumnFin">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"

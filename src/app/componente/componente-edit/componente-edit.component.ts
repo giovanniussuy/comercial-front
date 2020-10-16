@@ -72,12 +72,34 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     format: ''
 }]
 
-  tableActions: PoTableAction[] = [
+  tableActionsItem: PoTableAction[] = [
     {
       label: 'Deletar', icon: "po-icon po-icon-delete",
-      action: item => this.delete(item)
+      action: item => this.delete(item,'item')
     }
   ];
+
+  tableActionsComponente: PoTableAction[] = [
+    {
+      label: 'Deletar', icon: "po-icon po-icon-delete",
+      action: item => this.delete(item,'compo')
+    }
+  ];
+
+  tableActionsFrete: PoTableAction[] = [
+    {
+      label: 'Deletar', icon: "po-icon po-icon-delete",
+      action: item => this.delete(item,'frete')
+    }
+  ];
+
+  tableActionsFinalidade: PoTableAction[] = [
+    {
+      label: 'Deletar', icon: "po-icon po-icon-delete",
+      action: item => this.delete(item,'finalidade')
+    }
+  ];
+
 
   pModalItemAction: PoModalAction = { label: "Incluir", action: () => { this.incluirItem() }, danger: true };
   sModalItemAction: PoModalAction = { label: 'Cancel', action: () => { this.poModalItem.close(); } };
@@ -131,23 +153,31 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     this.back();
   }
 
-  delete(obj: any) {
-    if (obj.item) {
-      let index = this.componente.itens.indexOf(obj)
-      this.componente.itens.splice(index, 1)
-    }
-    else if (obj.componente) {
-      let index = this.componente.idsComponentes.indexOf(obj)
-      this.componente.idsComponentes.splice(index, 1)
-    }
-    else if (obj.tipoFrete) {
-      let index = this.componente.tiposFrete.indexOf(obj)
-      this.componente.tiposFrete.splice(index, 1)
-    }
-    else if (obj.finalidade) {
-      let index = this.componente.finalidades.indexOf(obj)
-      this.componente.finalidades.splice(index, 1)
-    }
+  delete(obj: any,tipo : String) {
+
+    switch(tipo) { 
+      case 'item': { 
+        let index = this.componente.itens.indexOf(obj)
+        this.componente.itens.splice(index, 1)
+         break; 
+      } 
+      case 'compo': { 
+        let index = this.componente.idsComponentes.indexOf(obj)
+        this.componente.idsComponentes.splice(index, 1)
+         break; 
+      } 
+      case 'frete': { 
+        let index = this.componente.tiposFrete.indexOf(obj)
+        this.componente.tiposFrete.splice(index, 1)
+        break; 
+      } 
+      case 'finalidade': { 
+        let index = this.componente.finalidades.indexOf(obj)
+        this.componente.finalidades.splice(index, 1)
+        break; 
+      } 
+   } 
+    
   }
 
   back() {
@@ -205,9 +235,8 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     }
 
     )
-    console.log('Aqui' + componenteDescricao)
+
     this.componente.idsComponentes.push({id: this.getIdComponente(), descricao: componenteDescricao });
-    //this.componente.idsComponentes.push(this.getObjetoSelecionado(this.optionsComponentes,this.componenteSelect));
     this.componenteSelect = null;
     this.poModalComponente.close();
   }
@@ -230,8 +259,6 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
 
   loadComponente(){
     this.service.get().subscribe((response) => {
-      //console.log(response['items'])
-
       /*for (let index = 0; index < response['items'].length; index++) {
         this.optionsComponentes.push({label : response['items'][index].descricao, 
                         value : response['items'][index].descricao})  
