@@ -123,10 +123,7 @@
                         [p-secondary-action]="sModalFinalidadeAction ? sModalFinalidadeAction : null"
                         p-click-out="true">
                         <po-select class="po-md-6" name="selectFinalidade" p-label="Componentes"
-                            [(ngModel)]="finalidadeSelect" [p-options]="[
-                            { label: 'INDUSTRIALIZAÇÃO',  value: '49abe010-0e29-11eb-adc1-0242ac120002' },
-                            { label: 'EXPORTAÇÃO DIRETA', value: '49abe38a-0e29-11eb-adc1-0242ac120002' },
-                            { label: 'COMPRA MATERIA-PRIMA', value: '49abe484-0e29-11eb-adc1-0242ac120002' }  ]">
+                            [(ngModel)]="finalidadeSelect" [p-options]="optionsFinalidade">
                         </po-select>
                     </po-modal>
                 </po-tab>

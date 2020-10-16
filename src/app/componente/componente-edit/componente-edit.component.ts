@@ -232,10 +232,7 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
   }
 
   incluirTipoFrete() {
-    //let tipoFreteSelect = { tipoFrete: this.tipoFreteSelect };
-    
     this.componente.tiposFrete.push({id: this.getIdFrete(), descricao: this.tipoFreteSelect });
-    //this.componente.tiposfrete.push(tipoFreteSelect);
     this.tipoFreteSelect = null;
     this.poModalTipoFrete.close();
   }
@@ -265,29 +262,28 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
   }
 
   incluirFinalidade() {
-    let finalidadeSelect = { finalidade: this.finalidadeSelect };
-    this.componente.finalidades.push(finalidadeSelect);
+    this.componente.finalidades.push({id: this.getIdFinalidade(), descricao: this.finalidadeSelect });
     this.finalidadeSelect = null;
     this.poModalFinalidade.close();
   }
 
   getIdFinalidade(): String{
     /*
-      { label: 'Milho', value: '8a812216-0e2a-11eb-adc1-0242ac120002' },
-      { label: 'Soja',  value: '8a81248c-0e2a-11eb-adc1-0242ac120002' },
-      { label: 'Trigo', value: '8a8125ea-0e2a-11eb-adc1-0242ac120002' }  
+     { label: 'INDUSTRIALIZAÇÃO',  value: '49abe010-0e29-11eb-adc1-0242ac120002' },
+    { label: 'EXPORTAÇÃO DIRETA', value: '49abe38a-0e29-11eb-adc1-0242ac120002' },
+    { label: 'COMPRA MATERIA-PRIMA', value: '49abe484-0e29-11eb-adc1-0242ac120002' }    
     */
-    switch(this.itemSelect) { 
-      case 'Milho': { 
-         return '8a812216-0e2a-11eb-adc1-0242ac120002'; 
+    switch(this.finalidadeSelect) { 
+      case 'INDUSTRIALIZAÇÃO': { 
+         return '49abe010-0e29-11eb-adc1-0242ac120002'; 
          break; 
       } 
-      case 'Soja': { 
-         return '8a81248c-0e2a-11eb-adc1-0242ac120002';
+      case 'EXPORTAÇÃO DIRETA': { 
+         return '49abe38a-0e29-11eb-adc1-0242ac120002';
          break; 
       } 
-      case 'Trigo': { 
-        return '8a8125ea-0e2a-11eb-adc1-0242ac120002';
+      case 'COMPRA MATERIA-PRIMA': { 
+        return '49abe484-0e29-11eb-adc1-0242ac120002';
         break; 
       } 
    } 
@@ -295,10 +291,10 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
   }
 
   loadFinalidade(){
-    this.optionsItens =  [
-      { label: 'Milho', value: 'Milho' },
-      { label: 'Soja',  value: 'Soja' },
-      { label: 'Trigo', value: 'Trigo' }  
+    this.optionsFinalidade =  [
+      { label: 'INDUSTRIALIZAÇÃO', value: 'INDUSTRIALIZAÇÃO' },
+      { label: 'EXPORTAÇÃO DIRETA',  value: 'EXPORTAÇÃO DIRETA' },
+      { label: 'COMPRA MATERIA-PRIMA', value: 'COMPRA MATERIA-PRIMA' }  
     ];
   }
 
