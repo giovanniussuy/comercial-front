@@ -207,13 +207,25 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     )
     console.log('Aqui' + componenteDescricao)
     this.componente.idsComponentes.push({id: this.getIdComponente(), descricao: componenteDescricao });
-    
+    //this.componente.idsComponentes.push(this.getObjetoSelecionado(this.optionsComponentes,this.componenteSelect));
     this.componenteSelect = null;
     this.poModalComponente.close();
   }
 
   getIdComponente(): String{
     return this.componenteSelect
+  }
+
+  getObjetoSelecionado(opt: Array<PoSelectOption>, pesquisarPor: any) : any {
+    
+    opt.forEach((element) => {
+      if(element.value == pesquisarPor)
+      {
+        return ({id: element.value , descricao: element.label });
+      }
+    })
+
+
   }
 
   loadComponente(){
