@@ -11,7 +11,7 @@ import { ComponenteService } from '../componente.service';
   styleUrls: ['./componente-edit.component.css']
 })
 export class ComponenteEditComponent implements OnInit {
-  componente: ComponentePreco = { codigo: '', descricao: '', itens: [], idsComponentes: [], tiposfrete: [], finalidades: [], aplicacao: '', unidadeMedida: '', moeda: '', tabelaPreco: '', codigoExterno: '', ativo: false, hedge: false, tipo: '', _id: '' };
+  componente: ComponentePreco = { codigo: '', descricao: '', itens: [], idsComponentes: [], tiposFrete: [], finalidades: [], aplicacao: '', unidadeMedida: '', moeda: '', tabelaPreco: '', codigoExterno: '', ativo: false, hedge: false, tipo: '', _id: '' };
   aplicacaoOpcoes: [];
   id: string;
   itemSelect: any;
@@ -20,6 +20,9 @@ export class ComponenteEditComponent implements OnInit {
   finalidadeSelect: any;
 
   optionsItens: Array<PoSelectOption> = [];
+  optionsComponentes: Array<PoSelectOption> = [];
+  optionsFrete: Array<PoSelectOption> = [];
+  optionsFinalidade: Array<PoSelectOption> = [];
 
 
   @ViewChild('formEditUser', { static: true }) formEditUser: NgForm;
@@ -93,6 +96,9 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     private router: Router,
     private poNotification: PoNotificationService) {
     this.loadItems();
+    this.loadFrete();
+    this.loadFinalidade();
+    this.loadComponente();
     this.id = this.activatedRoute.snapshot.params.id;
     this.pTitle = 'Incluir componente de preço';
     if (this.id) {
@@ -135,8 +141,8 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
       this.componente.idsComponentes.splice(index, 1)
     }
     else if (obj.tipoFrete) {
-      let index = this.componente.tiposfrete.indexOf(obj)
-      this.componente.tiposfrete.splice(index, 1)
+      let index = this.componente.tiposFrete.indexOf(obj)
+      this.componente.tiposFrete.splice(index, 1)
     }
     else if (obj.finalidade) {
       let index = this.componente.finalidades.indexOf(obj)
@@ -151,9 +157,7 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
 
   
   incluirItem() {
-    
-    let incluirItem = { id: this.getIdItens(),descricao: this.itemSelect };
-    this.componente.itens.push(incluirItem);
+    this.componente.itens.push({id: this.getIdItens(), descricao: this.itemSelect });
     this.itemSelect = null;
     this.poModalItem.close();
   }
@@ -196,11 +200,68 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     this.poModalComponente.close();
   }
 
+  getIdComponente(): String{
+    /*
+      { label: 'Milho', value: '8a812216-0e2a-11eb-adc1-0242ac120002' },
+      { label: 'Soja',  value: '8a81248c-0e2a-11eb-adc1-0242ac120002' },
+      { label: 'Trigo', value: '8a8125ea-0e2a-11eb-adc1-0242ac120002' }  
+    */
+    switch(this.itemSelect) { 
+      case 'Milho': { 
+         return '8a812216-0e2a-11eb-adc1-0242ac120002'; 
+         break; 
+      } 
+      case 'Soja': { 
+         return '8a81248c-0e2a-11eb-adc1-0242ac120002';
+         break; 
+      } 
+      case 'Trigo': { 
+        return '8a8125ea-0e2a-11eb-adc1-0242ac120002';
+        break; 
+      } 
+   } 
+
+  }
+
+  loadComponente(){
+    this.optionsItens =  [
+      { label: 'Milho', value: 'Milho' },
+      { label: 'Soja',  value: 'Soja' },
+      { label: 'Trigo', value: 'Trigo' }  
+    ];
+  }
+
   incluirTipoFrete() {
-    let tipoFreteSelect = { tipoFrete: this.tipoFreteSelect };
-    this.componente.tiposfrete.push(tipoFreteSelect);
+    //let tipoFreteSelect = { tipoFrete: this.tipoFreteSelect };
+    
+    this.componente.tiposFrete.push({id: this.getIdFrete(), descricao: this.tipoFreteSelect });
+    //this.componente.tiposfrete.push(tipoFreteSelect);
     this.tipoFreteSelect = null;
     this.poModalTipoFrete.close();
+  }
+
+  getIdFrete(): String{
+    /*
+    { label: 'CIF', value: '8a8127ca-0e2a-11eb-adc1-0242ac120002' },
+    { label: 'FOB', value: '8a812900-0e2a-11eb-adc1-0242ac120002' }
+    */
+    switch(this.tipoFreteSelect) { 
+      case 'CIF': { 
+         return '8a8127ca-0e2a-11eb-adc1-0242ac120002'; 
+         break; 
+      } 
+      case 'FOB': { 
+         return '8a812900-0e2a-11eb-adc1-0242ac120002';
+         break; 
+      } 
+   } 
+  }
+
+  loadFrete(){
+    this.optionsFrete =  [
+      { label: 'CIF', value: 'CIF' },
+      { label: 'FOB',  value: 'FOB' }
+    ];
   }
 
   incluirFinalidade() {
@@ -208,6 +269,37 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     this.componente.finalidades.push(finalidadeSelect);
     this.finalidadeSelect = null;
     this.poModalFinalidade.close();
+  }
+
+  getIdFinalidade(): String{
+    /*
+      { label: 'Milho', value: '8a812216-0e2a-11eb-adc1-0242ac120002' },
+      { label: 'Soja',  value: '8a81248c-0e2a-11eb-adc1-0242ac120002' },
+      { label: 'Trigo', value: '8a8125ea-0e2a-11eb-adc1-0242ac120002' }  
+    */
+    switch(this.itemSelect) { 
+      case 'Milho': { 
+         return '8a812216-0e2a-11eb-adc1-0242ac120002'; 
+         break; 
+      } 
+      case 'Soja': { 
+         return '8a81248c-0e2a-11eb-adc1-0242ac120002';
+         break; 
+      } 
+      case 'Trigo': { 
+        return '8a8125ea-0e2a-11eb-adc1-0242ac120002';
+        break; 
+      } 
+   } 
+
+  }
+
+  loadFinalidade(){
+    this.optionsItens =  [
+      { label: 'Milho', value: 'Milho' },
+      { label: 'Soja',  value: 'Soja' },
+      { label: 'Trigo', value: 'Trigo' }  
+    ];
   }
 
 }
