@@ -70,10 +70,7 @@
                     <po-modal #modalItem p-title="Incluir Item" [p-primary-action]="pModalItemAction"
                         [p-secondary-action]="sModalItemAction ? sModalItemAction : null" p-click-out="true">
                         <po-select class="po-md-6" name="selectItens" p-label="Itens" [(ngModel)]="itemSelect"
-                            [p-options]="[
-                            { label: 'Milho', value: '8a812216-0e2a-11eb-adc1-0242ac120002' },
-                            { label: 'Soja',  value: '8a81248c-0e2a-11eb-adc1-0242ac120002' },
-                            { label: 'Trigo', value: '8a8125ea-0e2a-11eb-adc1-0242ac120002' }  ]">
+                            [p-options]="optionsItens">
                         </po-select>
                     </po-modal>
                 </po-tab>

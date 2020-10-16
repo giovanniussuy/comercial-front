@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn, PoNotificationService } from '@po-ui/ng-components';
+import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn, PoNotificationService,PoSelectOption } from '@po-ui/ng-components';
 import { ComponentePreco } from 'src/app/model/componente/componente-preco.module';
 import { ComponenteService } from '../componente.service';
 
@@ -18,6 +18,8 @@ export class ComponenteEditComponent implements OnInit {
   componenteSelect: any;
   tipoFreteSelect: any;
   finalidadeSelect: any;
+
+  optionsItens: Array<PoSelectOption> = [];
 
 
   @ViewChild('formEditUser', { static: true }) formEditUser: NgForm;
@@ -90,6 +92,7 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
     private activatedRoute: ActivatedRoute, 
     private router: Router,
     private poNotification: PoNotificationService) {
+    this.loadItems();
     this.id = this.activatedRoute.snapshot.params.id;
     this.pTitle = 'Incluir componente de preço';
     if (this.id) {
@@ -148,11 +151,42 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
 
   
   incluirItem() {
-    console.log(this.itemSelect)
-    let incluirItem = { descricao: this.itemSelect };
+    
+    let incluirItem = { id: this.getIdItens(),descricao: this.itemSelect };
     this.componente.itens.push(incluirItem);
     this.itemSelect = null;
     this.poModalItem.close();
+  }
+
+  getIdItens(): String{
+    /*
+      { label: 'Milho', value: '8a812216-0e2a-11eb-adc1-0242ac120002' },
+      { label: 'Soja',  value: '8a81248c-0e2a-11eb-adc1-0242ac120002' },
+      { label: 'Trigo', value: '8a8125ea-0e2a-11eb-adc1-0242ac120002' }  
+    */
+    switch(this.itemSelect) { 
+      case 'Milho': { 
+         return '8a812216-0e2a-11eb-adc1-0242ac120002'; 
+         break; 
+      } 
+      case 'Soja': { 
+         return '8a81248c-0e2a-11eb-adc1-0242ac120002';
+         break; 
+      } 
+      case 'Trigo': { 
+        return '8a8125ea-0e2a-11eb-adc1-0242ac120002';
+        break; 
+      } 
+   } 
+
+  }
+
+  loadItems(){
+    this.optionsItens =  [
+      { label: 'Milho', value: 'Milho' },
+      { label: 'Soja',  value: 'Soja' },
+      { label: 'Trigo', value: 'Trigo' }  
+    ];
   }
 
   incluirComponente() {
