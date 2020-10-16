@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn, PoNotificationService } from '@po-ui/ng-components';
 import { ComponentePreco } from 'src/app/model/componente/componente-preco.module';
 import { ComponenteService } from '../componente.service';
 
@@ -18,6 +18,7 @@ export class ComponenteEditComponent implements OnInit {
   componenteSelect: any;
   tipoFreteSelect: any;
   finalidadeSelect: any;
+
 
   @ViewChild('formEditUser', { static: true }) formEditUser: NgForm;
   @ViewChild('modalItem', { static: true }) poModalItem: PoModalComponent;
@@ -85,7 +86,10 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
 
  
 
-  constructor(private service: ComponenteService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private service: ComponenteService, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router,
+    private poNotification: PoNotificationService) {
     this.id = this.activatedRoute.snapshot.params.id;
     this.pTitle = 'Incluir componente de preço';
     if (this.id) {
@@ -106,10 +110,10 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
 
   save() {
     if (this.id) {
-      this.service.update(this.componente, this.id).subscribe(() => this.back());
+      this.service.update(this.componente, this.id).subscribe(() => this.poNotification.success(`Produto atualizado`));
 
     } else {
-      this.service.create(this.componente).subscribe(() => this.back());
+      this.service.create(this.componente).subscribe(() => this.poNotification.success(`Produto criado`));
     }
 
   }
@@ -138,6 +142,7 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
   }
 
   back() {
+    //this.poNotification.success(`Action clicked: `);
     this.router.navigateByUrl(`componente`);
   }
 
