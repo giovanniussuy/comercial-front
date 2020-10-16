@@ -11,7 +11,7 @@ import { ComponenteService } from '../componente.service';
   styleUrls: ['./componente-edit.component.css']
 })
 export class ComponenteEditComponent implements OnInit {
-  componente: ComponentePreco = { codigo: '', descricao: '', itens: [], componentes: [], tiposFrete: [], finalidades: [], aplicacao: '', unidadeMedida: '', moeda: '', tabelaPreco: '', codigoExterno: '', ativo: false, hedge: false, tipo: '', _id: '' };
+  componente: ComponentePreco = { codigo: '', descricao: '', itens: [], idsComponentes: [], tiposfrete: [], finalidades: [], aplicacao: '', unidadeMedida: '', moeda: '', tabelaPreco: '', codigoExterno: '', ativo: false, hedge: false, tipo: '', _id: '' };
   aplicacaoOpcoes: [];
   id: string;
   itemSelect: any;
@@ -37,6 +37,35 @@ export class ComponenteEditComponent implements OnInit {
     format: ''
   }];
 
+  public tableColumn: Array<PoTableColumn> = [{
+    property: 'descricao',
+    width: '20%',
+    label: 'Descrição',
+    format: ''
+}]
+
+public tableColumnFin: Array<PoTableColumn> = [{
+    property: 'descricao',
+    width: '20%',
+    label: 'Descrição',
+    format: ''
+}]
+
+public tableColumnFrete: Array<PoTableColumn> = [{
+    property: 'descricao',
+    width: '20%',
+    label: 'Descrição',
+    format: ''
+}]
+
+
+public tableColumnComponentes: Array<PoTableColumn> = [{
+    property: 'descricao',
+    width: '20%',
+    label: 'Descrição',
+    format: ''
+}]
+
   tableActions: PoTableAction[] = [
     {
       label: 'Deletar', icon: "po-icon po-icon-delete",
@@ -54,12 +83,7 @@ export class ComponenteEditComponent implements OnInit {
   sModalFinalidadeAction: PoModalAction = { label: 'Cancel', action: () => { this.poModalFinalidade.close(); } };
   pTitle: string;
 
-  public tableColumn: Array<PoTableColumn> = [{
-    property: 'codigo',
-    width: '20%',
-    label: 'Código',
-    format: ''
-}]
+ 
 
   constructor(private service: ComponenteService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.id = this.activatedRoute.snapshot.params.id;
@@ -75,13 +99,7 @@ export class ComponenteEditComponent implements OnInit {
 
   load() {
     this.service.getById(this.id).subscribe((response) => {
-      this.componente = response      
-      
-      let qtdItens = this.componente.itens.length;
-      for (let count = 0; count < qtdItens; count++){
-        
-        this.componente.itens[count] = "codigo:" + response.itens.valueOf(count)
-      }
+      this.componente = response         
       
     });
   }
@@ -106,12 +124,12 @@ export class ComponenteEditComponent implements OnInit {
       this.componente.itens.splice(index, 1)
     }
     else if (obj.componente) {
-      let index = this.componente.componentes.indexOf(obj)
-      this.componente.componentes.splice(index, 1)
+      let index = this.componente.idsComponentes.indexOf(obj)
+      this.componente.idsComponentes.splice(index, 1)
     }
     else if (obj.tipoFrete) {
-      let index = this.componente.tiposFrete.indexOf(obj)
-      this.componente.tiposFrete.splice(index, 1)
+      let index = this.componente.tiposfrete.indexOf(obj)
+      this.componente.tiposfrete.splice(index, 1)
     }
     else if (obj.finalidade) {
       let index = this.componente.finalidades.indexOf(obj)
@@ -125,29 +143,29 @@ export class ComponenteEditComponent implements OnInit {
 
   
   incluirItem() {
-    let incluirItem = { item: this.itemSelect, descricao: 'vendido' };
-    //this.componente.itens.push(incluirItem);
+    let incluirItem = { descricao: this.itemSelect };
+    this.componente.itens.push(incluirItem);
     this.itemSelect = null;
     this.poModalItem.close();
   }
 
   incluirComponente() {
-    let componenteSelect = { componente: this.componenteSelect, descricao: 'oficial' };
-    //this.componente.componentes.push(componenteSelect);
+    let componenteSelect = { codigo: this.componenteSelect };
+    this.componente.idsComponentes.push(componenteSelect);
     this.componenteSelect = null;
     this.poModalComponente.close();
   }
 
   incluirTipoFrete() {
-    let tipoFreteSelect = { tipoFrete: this.tipoFreteSelect, descricao: 'registrado' };
-    //this.componente.tiposFrete.push(tipoFreteSelect);
+    let tipoFreteSelect = { tipoFrete: this.tipoFreteSelect };
+    this.componente.tiposfrete.push(tipoFreteSelect);
     this.tipoFreteSelect = null;
     this.poModalTipoFrete.close();
   }
 
   incluirFinalidade() {
-    let finalidadeSelect = { finalidade: this.finalidadeSelect, descricao: 'a definir' };
-    //this.componente.finalidades.push(finalidadeSelect);
+    let finalidadeSelect = { finalidade: this.finalidadeSelect };
+    this.componente.finalidades.push(finalidadeSelect);
     this.finalidadeSelect = null;
     this.poModalFinalidade.close();
   }

@@ -69,6 +69,10 @@ export class ComponenteListComponent {
 
     tableActions: PoTableAction[] = [
         {
+            label: 'Visualizar', icon: "po-icon po-icon po-icon-eye",
+            action: item => this.router.navigateByUrl(`componente/edit/${item.id}`)
+        },
+        {
             label: 'Editar', icon: "po-icon po-icon-edit",
             action: item => this.router.navigateByUrl(`componente/edit/${item.id}`)
         },

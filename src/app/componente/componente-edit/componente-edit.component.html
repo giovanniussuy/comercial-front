@@ -69,15 +69,15 @@
                         [p-secondary-action]="sModalItemAction ? sModalItemAction : null" p-click-out="true">
                         <po-select class="po-md-6" name="selectItens" p-label="Itens" [(ngModel)]="itemSelect"
                             [p-options]="[
-                            { label: 'Milho comprado', value: 'Milho' },
-                            { label: 'Soja comprado', value: 'Soja' },
-                            { label: 'Trigo comprado', value: 'Trigo' }  ]">
+                            { label: 'Milho', value: '8a812216-0e2a-11eb-adc1-0242ac120002' },
+                            { label: 'Soja',  value: '8a81248c-0e2a-11eb-adc1-0242ac120002' },
+                            { label: 'Trigo', value: '8a8125ea-0e2a-11eb-adc1-0242ac120002' }  ]">
                         </po-select>
                     </po-modal>
                 </po-tab>
 
                 <po-tab p-label="Componentes">
-                    <po-table [(p-items)]="componente.componentes" [p-actions]="tableActions">
+                    <po-table [(p-items)]="componente.idsComponentes" [p-actions]="tableActions" [p-columns]="tableColumnComponentes"> 
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -97,7 +97,7 @@
                 </po-tab>
 
                 <po-tab p-label="Tipos de frete">
-                    <po-table [(p-items)]="componente.tiposFrete" [p-actions]="tableActions">
+                    <po-table [(p-items)]="componente.tiposfrete" [p-actions]="tableActions" [p-columns]= "tableColumnFrete">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -108,15 +108,15 @@
                         [p-secondary-action]="sModalTipoFreteAction ? sModalTipoFreteAction : null" p-click-out="true">
                         <po-select class="po-md-6" name="selectTipoFrete" p-label="Componentes"
                             [(ngModel)]="tipoFreteSelect" [p-options]="[
-                            { label: 'Frete turistico', value: 'Frete turistico' },
-                            { label: 'Frete pesado', value: 'Frete pesado' },
-                            { label: 'Frete internacional', value: 'Frete internacional' }  ]">
+                            { label: 'CIF', value: '8a8127ca-0e2a-11eb-adc1-0242ac120002' },
+                            { label: 'FOB', value: '8a812900-0e2a-11eb-adc1-0242ac120002' }
+                             ]">
                         </po-select>
                     </po-modal>
                 </po-tab>
 
                 <po-tab p-label="Finalidades">
-                    <po-table [(p-items)]="componente.finalidades" [p-actions]="tableActions">
+                    <po-table [(p-items)]="componente.finalidades" [p-actions]="tableActions" [p-columns]="tableColumnFin">
                     </po-table>
 
                     <po-button p-icon="po-icon po-icon-plus" p-label="Incluir" p-type="primary"
@@ -128,9 +128,9 @@
                         p-click-out="true">
                         <po-select class="po-md-6" name="selectFinalidade" p-label="Componentes"
                             [(ngModel)]="finalidadeSelect" [p-options]="[
-                            { label: 'Compra', value: 'Compra' },
-                            { label: 'Venda', value: 'Venda' },
-                            { label: 'Presente', value: 'Presente' }  ]">
+                            { label: 'INDUSTRIALIZAÇÃO',  value: '49abe010-0e29-11eb-adc1-0242ac120002' },
+                            { label: 'EXPORTAÇÃO DIRETA', value: '49abe38a-0e29-11eb-adc1-0242ac120002' },
+                            { label: 'COMPRA MATERIA-PRIMA', value: '49abe484-0e29-11eb-adc1-0242ac120002' }  ]">
                         </po-select>
                     </po-modal>
                 </po-tab>
