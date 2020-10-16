@@ -194,7 +194,19 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
   }
 
   incluirComponente() {
-    this.componente.idsComponentes.push({id: this.getIdComponente(), descricao: this.componenteSelect });
+
+    let componenteDescricao = '';
+    this.optionsComponentes.forEach((element) => {
+      console.log(element.label)
+      if(element.value == this.componenteSelect)
+      {
+        componenteDescricao = element.label
+      }
+    }
+
+    )
+    console.log('Aqui' + componenteDescricao)
+    this.componente.idsComponentes.push({id: this.getIdComponente(), descricao: componenteDescricao });
     
     this.componenteSelect = null;
     this.poModalComponente.close();
@@ -202,32 +214,11 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
 
   getIdComponente(): String{
     return this.componenteSelect
-    /*
-      [
-                            { label: 'Balança', value: 'BALANCA' },
-                            { label: 'Frete', value: 'FRETE' },
-                            { label: 'Cambio', value: 'CAMBIO' }  ] 
-    */
-    /*switch(this.itemSelect) { 
-      case 'Milho': { 
-         return '8a812216-0e2a-11eb-adc1-0242ac120002'; 
-         break; 
-      } 
-      case 'Soja': { 
-         return '8a81248c-0e2a-11eb-adc1-0242ac120002';
-         break; 
-      } 
-      case 'Trigo': { 
-        return '8a8125ea-0e2a-11eb-adc1-0242ac120002';
-        break; 
-      } 
-   } */
-
   }
 
   loadComponente(){
     this.service.get().subscribe((response) => {
-      console.log(response['items'])
+      //console.log(response['items'])
 
       /*for (let index = 0; index < response['items'].length; index++) {
         this.optionsComponentes.push({label : response['items'][index].descricao, 
@@ -237,8 +228,8 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
       }*/
 
       response['items'].forEach(element => {
-        console.log(element.descricao)
-        this.optionsComponentes.push({label : element.descricao, value : element.descricao})  
+        
+        this.optionsComponentes.push({label : element.descricao, value : element.id})  
       });
               
 
