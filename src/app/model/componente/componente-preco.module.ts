@@ -1,6 +1,11 @@
 import { Item } from '../item/item.module';
 import { Model } from "../Model";
 
+export class Default {
+    id?: string;
+    descricao? : string;
+}
+
 export interface ComponentePreco extends Model {
     codigo: string;
     descricao: string;

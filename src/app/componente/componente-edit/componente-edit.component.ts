@@ -194,19 +194,21 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
   }
 
   incluirComponente() {
-    let componenteSelect = { codigo: this.componenteSelect };
-    this.componente.idsComponentes.push(componenteSelect);
+    this.componente.idsComponentes.push({id: this.getIdComponente(), descricao: this.componenteSelect });
+    
     this.componenteSelect = null;
     this.poModalComponente.close();
   }
 
   getIdComponente(): String{
+    return this.componenteSelect
     /*
-      { label: 'Milho', value: '8a812216-0e2a-11eb-adc1-0242ac120002' },
-      { label: 'Soja',  value: '8a81248c-0e2a-11eb-adc1-0242ac120002' },
-      { label: 'Trigo', value: '8a8125ea-0e2a-11eb-adc1-0242ac120002' }  
+      [
+                            { label: 'Balança', value: 'BALANCA' },
+                            { label: 'Frete', value: 'FRETE' },
+                            { label: 'Cambio', value: 'CAMBIO' }  ] 
     */
-    switch(this.itemSelect) { 
+    /*switch(this.itemSelect) { 
       case 'Milho': { 
          return '8a812216-0e2a-11eb-adc1-0242ac120002'; 
          break; 
@@ -219,16 +221,29 @@ public tableColumnComponentes: Array<PoTableColumn> = [{
         return '8a8125ea-0e2a-11eb-adc1-0242ac120002';
         break; 
       } 
-   } 
+   } */
 
   }
 
   loadComponente(){
-    this.optionsItens =  [
-      { label: 'Milho', value: 'Milho' },
-      { label: 'Soja',  value: 'Soja' },
-      { label: 'Trigo', value: 'Trigo' }  
-    ];
+    this.service.get().subscribe((response) => {
+      console.log(response['items'])
+
+      /*for (let index = 0; index < response['items'].length; index++) {
+        this.optionsComponentes.push({label : response['items'][index].descricao, 
+                        value : response['items'][index].descricao})  
+       
+        
+      }*/
+
+      response['items'].forEach(element => {
+        console.log(element.descricao)
+        this.optionsComponentes.push({label : element.descricao, value : element.descricao})  
+      });
+              
+
+    });
+    
   }
 
   incluirTipoFrete() {

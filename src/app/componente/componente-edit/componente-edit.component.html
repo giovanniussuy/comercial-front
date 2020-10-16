@@ -87,10 +87,7 @@
                         [p-secondary-action]="sModalComponenteAction ? sModalComponenteAction : null"
                         p-click-out="true">
                         <po-select class="po-md-6" name="selectComponente" p-label="Componentes"
-                            [(ngModel)]="componenteSelect" [p-options]="[
-                            { label: 'Balança', value: 'BALANCA' },
-                            { label: 'Frete', value: 'FRETE' },
-                            { label: 'Cambio', value: 'CAMBIO' }  ]">
+                            [(ngModel)]="componenteSelect" [p-options]="optionsComponentes">
                         </po-select>
                     </po-modal>
                 </po-tab>
